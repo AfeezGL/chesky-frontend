@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "watch:css": "npx tailwindcss -i ./styles/input.css -o ./styles/output.css --watch",
+    "watch:js": "next dev",
+    "dev": "concurrently \"yarn watch:css\" \"yarn watch:js\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
