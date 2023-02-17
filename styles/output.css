@@ -539,6 +539,14 @@ video {
   margin-top: 7rem;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
+}
+
 .block {
   display: block;
 }
@@ -577,6 +585,10 @@ video {
 
 .flex-1 {
   flex: 1 1 0%;
+}
+
+.auto-rows-fr {
+  grid-auto-rows: minmax(0, 1fr);
 }
 
 .grid-cols-2 {
@@ -883,6 +895,10 @@ video {
 
   .sm\:hidden {
     display: none;
+  }
+
+  .sm\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
