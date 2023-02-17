@@ -1,3 +1,4 @@
+import CarList from '@/cars/CarList';
 import SearchBar from '@/components/SearchBar';
 import SideBar from '@/sidebar/SideBar';
 
@@ -7,6 +8,7 @@ export default function Index() {
       <SearchBar />
       <div className='py-10 sm:flex sm:gap-8'>
         <SideBar />
+        <CarList />
       </div>
     </>
   );

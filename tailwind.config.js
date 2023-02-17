@@ -6,6 +6,7 @@ module.exports = {
     './layout/**/*.{html,js,jsx}',
     './homepage/**/*.{html,js,jsx}',
     './sidebar/**/*.{html,js,jsx}',
+    './cars/**/*.{html,js,jsx}',
   ],
   theme: {
     colors: {
