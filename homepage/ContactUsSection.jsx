@@ -15,7 +15,7 @@ const contactDetails = [
   },
 ];
 
-export default function ContactUs() {
+export default function ContactUsSection() {
   return (
     <section className='mt-16 mb-24' id='contact-us' aria-label='Contact us'>
       <h2 className='font-bold text-blue text-3xl text-center capitalize pb-14'>
