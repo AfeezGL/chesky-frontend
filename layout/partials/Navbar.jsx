@@ -1,5 +1,6 @@
 import Exit from '@/assets/layout/exit.svg';
 import Hambuger from '@/assets/layout/hambuger.svg';
+import LogoLight from '@/assets/layout/logo-light.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -14,12 +15,7 @@ export default function NavBar() {
         <div className='relative flex h-16 items-center justify-between'>
           <div className='flex flex-1 items-center justify-between'>
             <div className='flex items-center'>
-              <Image
-                src={'/logo-light.png'}
-                width={92}
-                height={53}
-                alt='Chesky'
-              />
+              <Image src={LogoLight} width={92} height={53} alt='Chesky' />
             </div>
             <div className='hidden sm:ml-6 sm:block'>
               <div className='flex space-x-4'>
