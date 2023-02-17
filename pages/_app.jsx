@@ -1,5 +1,10 @@
-import '@/styles/globals.css'
+import Page from '@/layout/Page';
+import '@/styles/output.css';
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Page>
+      <Component {...pageProps} />
+    </Page>
+  );
 }
