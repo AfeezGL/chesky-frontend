@@ -1,4 +1,5 @@
 import SearchBar from '@/components/SearchBar';
+import ContactUsSection from '@/homepage/ContactUsSection';
 import FAQSection from '@/homepage/FAQSection';
 import HeroSection from '@/homepage/partials/Herosection';
 import PartnersSection from '@/homepage/PartnersSection';
@@ -14,6 +15,7 @@ export default function Home() {
       <TopOffersSection />
       <WhatMakesUsStandOut />
       <FAQSection />
+      <ContactUsSection />
     </>
   );
 }
