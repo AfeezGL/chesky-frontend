@@ -3,6 +3,7 @@ import Car from '@/cars/partials/Car';
 import CarDetails from '@/cars/partials/CarDetails';
 import PickUpAndDropOff from '@/cars/partials/PickUpAndDropOff';
 import SummaryOfCharges from '@/cars/partials/SummaryOfCharges';
+import RentalDisclaimer from '@/cars/RentalDisclaimer';
 import { useRouter } from 'next/router';
 
 export default function CarDetailsPage() {
@@ -43,9 +44,10 @@ export default function CarDetailsPage() {
         </div>
         <PickUpAndDropOff pickUp={car.pickUp} dropOff={car.dropOff} />
       </div>
-      <div className='sm:grow'>
+      <div className='sm:basis-1/3'>
         <div className='sm:mb-16 lg:mb-28'>
           <SummaryOfCharges charges={car.charges} />
+          <RentalDisclaimer />
         </div>
       </div>
     </section>
