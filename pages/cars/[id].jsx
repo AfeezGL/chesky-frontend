@@ -2,6 +2,7 @@ import CarImg from '@/assets/cars/car-img.svg';
 import Car from '@/cars/partials/Car';
 import CarDetails from '@/cars/partials/CarDetails';
 import PickUpAndDropOff from '@/cars/partials/PickUpAndDropOff';
+import SummaryOfCharges from '@/cars/partials/SummaryOfCharges';
 import { useRouter } from 'next/router';
 
 export default function CarDetailsPage() {
@@ -21,6 +22,14 @@ export default function CarDetailsPage() {
       time: 'Thu, Jan 30, 2023 7:00 AM',
       location: 'ogbomoso, Oyo state, Nigeria',
     },
+    charges: {
+      days: 1,
+      rate: 151.5,
+      taxes: 5,
+      dueNow: 0,
+      dueAtPickup: 156.5,
+      total: 156.5,
+    },
   };
   return (
     <section
@@ -34,7 +43,11 @@ export default function CarDetailsPage() {
         </div>
         <PickUpAndDropOff pickUp={car.pickUp} dropOff={car.dropOff} />
       </div>
-      <div>cost section</div>
+      <div className='sm:grow'>
+        <div className='sm:mb-16 lg:mb-28'>
+          <SummaryOfCharges charges={car.charges} />
+        </div>
+      </div>
     </section>
   );
 }
