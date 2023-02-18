@@ -1,11 +1,18 @@
 import CarImg from '@/assets/cars/car-img.svg';
 import Car from '@/cars/partials/Car';
+import CarDetails from '@/cars/partials/CarDetails';
 import { useRouter } from 'next/router';
 
-export default function CarDetails() {
+export default function CarDetailsPage() {
   const router = useRouter();
   const { id } = router.query;
-  const car = { id, name: 'Toyota Corolla', image: CarImg, price: 40 };
+  const car = {
+    id,
+    name: 'Toyota Corolla',
+    image: CarImg,
+    price: 40,
+    details: { brand: 'toyota', model: 'corolla', color: 'blue' },
+  };
   return (
     <section
       aria-label='Car details'
@@ -13,6 +20,9 @@ export default function CarDetails() {
     >
       <div className='sm:basis-2/3'>
         <Car car={car} showPrice={false} />
+        <div className='max-w-md'>
+          <CarDetails details={car.details} />
+        </div>
       </div>
       <div>cost section</div>
     </section>
