@@ -1,6 +1,7 @@
 import CarImg from '@/assets/cars/car-img.svg';
 import Car from '@/cars/partials/Car';
 import CarDetails from '@/cars/partials/CarDetails';
+import PickUpAndDropOff from '@/cars/partials/PickUpAndDropOff';
 import { useRouter } from 'next/router';
 
 export default function CarDetailsPage() {
@@ -12,6 +13,14 @@ export default function CarDetailsPage() {
     image: CarImg,
     price: 40,
     details: { brand: 'toyota', model: 'corolla', color: 'blue' },
+    pickUp: {
+      time: 'Thu, Jan 26, 2023 7:00 AM',
+      location: 'ogbomoso, Oyo state, Nigeria',
+    },
+    dropOff: {
+      time: 'Thu, Jan 30, 2023 7:00 AM',
+      location: 'ogbomoso, Oyo state, Nigeria',
+    },
   };
   return (
     <section
@@ -23,6 +32,7 @@ export default function CarDetailsPage() {
         <div className='max-w-md'>
           <CarDetails details={car.details} />
         </div>
+        <PickUpAndDropOff pickUp={car.pickUp} dropOff={car.dropOff} />
       </div>
       <div>cost section</div>
     </section>
