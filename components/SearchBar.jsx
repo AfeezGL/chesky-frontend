@@ -18,20 +18,20 @@ export default function SearchBar() {
           <input
             type='text'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder=' Mnter mile radius'
-            name='radius'
+            placeholder='Pick up location'
+            name='pickupLocation'
           />
           <input
-            type='date'
+            type='datetime-local'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Select pick up date'
-            name='pickUpDate'
+            name='pickupDateTime'
           />
           <input
             type='date'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Select drop off date'
-            name='dropOffDate'
+            name='dropOffDateTime'
           />
         </div>
 

@@ -3,7 +3,13 @@ import Image from 'next/image';
 export default function Attribute({ attribute }) {
   return (
     <div
-      className={`bg-${attribute.color} flex flex-col p-4 rounded-xl justify-center items-center`}
+      className={`flex flex-col p-4 rounded-xl justify-center items-center ${
+        attribute.color == 'yellow'
+          ? 'bg-yellow'
+          : attribute.color == 'pink'
+          ? 'bg-pink'
+          : 'bg-blue-light'
+      }`}
     >
       <Image
         src={attribute.image}
