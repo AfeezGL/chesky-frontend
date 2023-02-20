@@ -22,7 +22,7 @@ export default function CarDetailsScreen({ car, handleHideCarDetails }) {
   return (
     <>
       <button className='p-2 bg-blue-light' onClick={handleHideCarDetails}>
-        back
+        X
       </button>
       <section
         aria-label='Car details'
