@@ -6,7 +6,7 @@ import SummaryOfCharges from '@/cars/partials/SummaryOfCharges';
 import RentalDisclaimer from '@/cars/RentalDisclaimer';
 import { useRouter } from 'next/router';
 
-export default function CarDetailsPage() {
+export default function CarDetailsScreen() {
   const router = useRouter();
   const { id } = router.query;
   const car = {
@@ -32,6 +32,7 @@ export default function CarDetailsPage() {
       total: 156.5,
     },
   };
+
   return (
     <section
       aria-label='Car details'
