@@ -20,18 +20,21 @@ export default function SearchBar() {
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Pick up location'
             name='pickupLocation'
+            required
           />
           <input
             type='datetime-local'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Select pick up date'
             name='pickupDateTime'
+            required
           />
           <input
             type='date'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Select drop off date'
             name='dropOffDateTime'
+            required
           />
         </div>
 
