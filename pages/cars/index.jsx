@@ -33,7 +33,18 @@ export default function Index() {
     setCurrentCar(car);
   };
 
-  if (showCarDetails) return <CarDetailsScreen car={currentCar} />;
+  const handleHideCarDetails = () => {
+    setShowCarDetails(false);
+    setCurrentCar(null);
+  };
+
+  if (showCarDetails)
+    return (
+      <CarDetailsScreen
+        car={currentCar}
+        handleHideCarDetails={handleHideCarDetails}
+      />
+    );
 
   return (
     <>
