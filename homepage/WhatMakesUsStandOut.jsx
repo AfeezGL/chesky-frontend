@@ -35,7 +35,7 @@ export default function WhatMakesUsStandOut() {
       </h2>
       <div className='grid grid-cols-3 gap-3'>
         {uniqueAttributes.map((attribute) => (
-          <Attribute attribute={attribute} key={attribute.key} />
+          <Attribute attribute={attribute} key={attribute.id} />
         ))}
       </div>
     </div>
