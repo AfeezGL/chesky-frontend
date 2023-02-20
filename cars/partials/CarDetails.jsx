@@ -4,7 +4,7 @@ export default function CarDetails({ details }) {
       <h2 className='font-bold text-lg'>More details</h2>
       <div className='flex justify-between'>
         <p>car brand</p>
-        <p>{details.brand}</p>
+        <p>{details.make}</p>
       </div>
       <div className='flex justify-between'>
         <p>car model name</p>
@@ -12,7 +12,7 @@ export default function CarDetails({ details }) {
       </div>
       <div className='flex justify-between'>
         <p>car colour</p>
-        <p>{details.color}</p>
+        <p>fix in future or remove</p>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import { useMutation } from 'react-query';
 
 export default function Index() {
   const [showCarDetails, setShowCarDetails] = useState(false);
+  const [currentCar, setCurrentCar] = useState(null);
   const router = useRouter();
   const { pickupDateTime, dropOffDateTime, pickupLocation } = router.query;
 
@@ -29,11 +30,13 @@ export default function Index() {
     }
   }, [pickupDateTime, dropOffDateTime, pickupLocation]);
 
-  const handleShowCarDetails = () => {
+  const handleShowCarDetails = (car) => {
+    console.log(car);
     setShowCarDetails(true);
+    setCurrentCar(car);
   };
 
-  if (showCarDetails) return <CarDetailsScreen />;
+  if (showCarDetails) return <CarDetailsScreen car={currentCar} />;
 
   return (
     <>
@@ -48,7 +51,7 @@ export default function Index() {
               <Car
                 car={car}
                 key={car.id}
-                handleShowCarDetails={handleShowCarDetails}
+                handleShowCarDetails={() => handleShowCarDetails(car)}
               />
             ))}
         </div>
