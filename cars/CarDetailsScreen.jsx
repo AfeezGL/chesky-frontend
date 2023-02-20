@@ -1,4 +1,5 @@
 import Car from '@/cars/partials/Car';
+import { useEffect } from 'react';
 import CarDetails from './partials/CarDetails';
 import PickUpAndDropOff from './partials/PickUpAndDropOff';
 import SummaryOfCharges from './partials/SummaryOfCharges';
@@ -14,6 +15,10 @@ const dropOff = {
 };
 
 export default function CarDetailsScreen({ car, handleHideCarDetails }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <button className='p-2 bg-blue-light' onClick={handleHideCarDetails}>
