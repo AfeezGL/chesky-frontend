@@ -1,7 +1,14 @@
 import FilterIcon from '@/assets/homepage/filter.svg';
+import useDatesValid from '@/hooks/useDatesValid';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function SearchBar() {
+  const [pickupDateTime, setPickupDateTime] = useState('');
+  const [dropOffDateTime, setDropOffDateTime] = useState('');
+  const [pickupLocation, setPickupLocation] = useState('');
+  const [datesValid] = useDatesValid(pickupDateTime, dropOffDateTime);
+
   return (
     <div className='border-blue border-2 rounded-xl mx-auto p-4'>
       <header className='text-blue font-semibold text-2xl pb-3 md:hidden'>
@@ -18,20 +25,29 @@ export default function SearchBar() {
           <input
             type='text'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder=' Mnter mile radius'
-            name='radius'
+            placeholder='Pick up location'
+            name='pickupLocation'
+            value={pickupLocation}
+            onChange={(e) => setPickupLocation(e.target.value)}
+            required
           />
           <input
-            type='date'
+            type='datetime-local'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Select pick up date'
-            name='pickUpDate'
+            name='pickupDateTime'
+            value={pickupDateTime}
+            onChange={(e) => setPickupDateTime(e.target.value)}
+            required
           />
           <input
             type='date'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Select drop off date'
-            name='dropOffDate'
+            name='dropOffDateTime'
+            value={dropOffDateTime}
+            onChange={(e) => setDropOffDateTime(e.target.value)}
+            required
           />
         </div>
 
@@ -46,8 +62,9 @@ export default function SearchBar() {
             />
           </button>
           <button
+            disabled={!datesValid}
             type='submit'
-            className='bg-blue px-10 py-3 rounded-md text-white font-semibold'
+            className='bg-blue px-10 py-3 rounded-md text-white font-semibold disabled:bg-blue-light'
           >
             Search
           </button>

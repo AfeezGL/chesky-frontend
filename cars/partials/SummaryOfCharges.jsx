@@ -17,26 +17,12 @@ export default function SummaryOfCharges({ charges }) {
         Summary of Charges
       </h2>
       <div className='flex justify-between py-1'>
-        <p>
-          {charges.days} X {charges.rate}
-        </p>
-        <p>{currency(charges.days * charges.rate)}</p>
-      </div>
-      <div className='flex justify-between py-1'>
-        <p>taxes and fees</p>
-        <p>{currency(charges.taxes)}</p>
-      </div>
-      <div className='flex justify-between py-1'>
-        <p>due now</p>
-        <p>{currency(charges.dueNow)}</p>
-      </div>
-      <div className='flex justify-between py-1'>
-        <p>due at pickup</p>
-        <p>{currency(charges.dueAtPickup)}</p>
+        <p>vehicle total</p>
+        <p>{currency(charges.vehicle_total)}</p>
       </div>
       <div className='flex justify-between py-1 font-bold'>
-        <p>total</p>
-        <p>{currency(charges.total)}</p>
+        <p>reservation total</p>
+        <p>{currency(charges.reservation_total)}</p>
       </div>
     </section>
   );
