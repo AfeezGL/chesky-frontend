@@ -4,34 +4,31 @@ import SearchBar from '@/components/SearchBar';
 import SideBar from '@/sidebar/SideBar';
 import axiosClient from '@/utils/axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 
 export default function Index() {
-  const [showCarDetails, setShowCarDetails] = useState(false);
-  const [currentCar, setCurrentCar] = useState(null);
   const router = useRouter();
   const { pickupDateTime, dropOffDateTime, pickupLocation } = router.query;
+  const [showCarDetails, setShowCarDetails] = useState(false);
+  const [currentCar, setCurrentCar] = useState(null);
 
-  const mutation = useMutation(async (payload) => {
-    const res = await axiosClient.post('/search', payload);
-
-    return await res.data;
-  });
-  const { isLoading, isSuccess, isError, data } = mutation;
-
-  useEffect(() => {
-    if (pickupDateTime && dropOffDateTime && pickupLocation && window) {
-      mutation.mutate({
+  const { isLoading, isSuccess, isError, data } = useQuery(
+    ['cars'],
+    async () => {
+      const res = await axiosClient.post('/search', {
         pickupDateTime,
         dropOffDateTime,
         pickupLocation,
       });
+      return await res.data;
+    },
+    {
+      enabled: !!pickupDateTime && !!dropOffDateTime && !!pickupLocation,
     }
-  }, [pickupDateTime, dropOffDateTime, pickupLocation]);
+  );
 
   const handleShowCarDetails = (car) => {
-    console.log(car);
     setShowCarDetails(true);
     setCurrentCar(car);
   };
