@@ -19,7 +19,11 @@ export default function Car({ car, showPrice = true }) {
       <div className='grow flex justify-between'>
         <div>
           <p className='text-blue font-bold text-xl py-5'>{`${car.category?.make} ${car.category?.model}`}</p>
-          <CarFeatures />
+          <CarFeatures
+            transmission={car.category.vehicle_transmission}
+            doors={car.capacity.doors}
+            connected={car.features.connected_car}
+          />
         </div>
         <div className='flex gap-4 flex-col justify-center items-center px-6'>
           {showPrice && (
