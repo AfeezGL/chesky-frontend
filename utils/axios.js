@@ -5,12 +5,8 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.response.use(
-  (response) => {
-    console.log(response);
-    return response;
-  },
+  (response) => response,
   (error) => {
-    console.log('error: ', error);
     if (error.response?.data?.data?.error?.status?.errors[0]?.details)
       throw new Error(error.response.data.data.error.status.errors[0].details);
 
