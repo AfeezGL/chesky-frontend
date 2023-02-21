@@ -10,7 +10,7 @@ const useValidateSearchForm = ({
   pickupDateTime,
   dropOffDateTime,
 }) => {
-  const [datesValid, setDatesValid] = useState(false);
+  const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
     if (
@@ -19,13 +19,13 @@ const useValidateSearchForm = ({
       dateGreaterThanNow(pickupDateTime) &&
       dateGreaterThanNow(dropOffDateTime)
     ) {
-      setDatesValid(true);
+      setFormValid(true);
     } else {
-      setDatesValid(false);
+      setFormValid(false);
     }
   }, [country_code, pickupLocation, pickupDateTime, dropOffDateTime]);
 
-  return [datesValid];
+  return [formValid];
 };
 
 export default useValidateSearchForm;
