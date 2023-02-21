@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Footer from './partials/Footer';
 import NavBar from './partials/Navbar';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ export default function Page({ children }) {
       <NavBar />
       <main className='mx-auto px-4 lg:container'>{children}</main>
       <Footer />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
