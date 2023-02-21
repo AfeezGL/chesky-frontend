@@ -12,8 +12,6 @@ export default function Index() {
   const router = useRouter();
   const { pickupDateTime, dropOffDateTime, pickupLocation, country_code } =
     router.query;
-  const [showCarDetails, setShowCarDetails] = useState(false);
-  const [currentCar, setCurrentCar] = useState(null);
 
   const { isLoading, isSuccess, isError, data, error } = useQuery(
     ['cars'],
@@ -44,24 +42,6 @@ export default function Index() {
       }).showToast();
   }, [error]);
 
-  const handleShowCarDetails = (car) => {
-    setShowCarDetails(true);
-    setCurrentCar(car);
-  };
-
-  const handleHideCarDetails = () => {
-    setShowCarDetails(false);
-    setCurrentCar(null);
-  };
-
-  if (showCarDetails)
-    return (
-      <CarDetailsScreen
-        car={currentCar}
-        handleHideCarDetails={handleHideCarDetails}
-      />
-    );
-
   return (
     <>
       <SearchBar />
@@ -70,14 +50,7 @@ export default function Index() {
         <div className='px-3 sm:px-0 w-full'>
           {isLoading && 'Loading...'}
           {isError && <div>Failed to load</div>}
-          {isSuccess &&
-            data.data.map((car) => (
-              <Car
-                car={car}
-                key={car.id}
-                handleShowCarDetails={() => handleShowCarDetails(car)}
-              />
-            ))}
+          {isSuccess && data.data.map((car) => <Car car={car} key={car._id} />)}
         </div>
       </div>
     </>
