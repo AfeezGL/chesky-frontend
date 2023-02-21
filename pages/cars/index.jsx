@@ -10,7 +10,8 @@ import Toastify from 'toastify-js';
 
 export default function Index() {
   const router = useRouter();
-  const { pickupDateTime, dropOffDateTime, pickupLocation } = router.query;
+  const { pickupDateTime, dropOffDateTime, pickupLocation, country_code } =
+    router.query;
   const [showCarDetails, setShowCarDetails] = useState(false);
   const [currentCar, setCurrentCar] = useState(null);
 
@@ -21,11 +22,17 @@ export default function Index() {
         pickupDateTime,
         dropOffDateTime,
         pickupLocation,
+        country_code,
       });
       return await res.data;
     },
     {
-      enabled: !!pickupDateTime && !!dropOffDateTime && !!pickupLocation,
+      enabled:
+        !!pickupDateTime &&
+        !!dropOffDateTime &&
+        !!pickupLocation &&
+        !!country_code &&
+        !!window,
     }
   );
 
