@@ -7,6 +7,7 @@ export default function SearchBar() {
   const [pickupDateTime, setPickupDateTime] = useState('');
   const [dropOffDateTime, setDropOffDateTime] = useState('');
   const [pickupLocation, setPickupLocation] = useState('');
+  const [countryCode, setCountryCode] = useState('');
   const [datesValid] = useDatesValid(pickupDateTime, dropOffDateTime);
 
   return (
@@ -19,8 +20,10 @@ export default function SearchBar() {
           <input
             type='text'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder='Zip code'
-            name='zipCode'
+            placeholder='Country code'
+            value={countryCode}
+            onChange={(e) => setCountryCode(e.target.value)}
+            name='country_code'
           />
           <input
             type='text'
