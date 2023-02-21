@@ -10,10 +10,6 @@ export default function CarDetails({ details }) {
         <p>car model name</p>
         <p>{details.model}</p>
       </div>
-      <div className='flex justify-between'>
-        <p>car colour</p>
-        <p>fix in future or remove</p>
-      </div>
     </div>
   );
 }
