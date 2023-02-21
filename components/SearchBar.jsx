@@ -1,5 +1,5 @@
 import FilterIcon from '@/assets/homepage/filter.svg';
-import useDatesValid from '@/hooks/useDatesValid';
+import useValidateSearchForm from '@/hooks/useValidateSearchForm';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -7,8 +7,13 @@ export default function SearchBar() {
   const [pickupDateTime, setPickupDateTime] = useState('');
   const [dropOffDateTime, setDropOffDateTime] = useState('');
   const [pickupLocation, setPickupLocation] = useState('');
-  const [countryCode, setCountryCode] = useState('');
-  const [datesValid] = useDatesValid(pickupDateTime, dropOffDateTime);
+  const [country_code, setCountryCode] = useState('');
+  const [formValid] = useValidateSearchForm({
+    country_code,
+    pickupLocation,
+    pickupDateTime,
+    dropOffDateTime,
+  });
 
   return (
     <div className='border-blue border-2 rounded-xl mx-auto p-4'>
@@ -21,9 +26,10 @@ export default function SearchBar() {
             type='text'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Country code'
-            value={countryCode}
+            value={country_code}
             onChange={(e) => setCountryCode(e.target.value)}
             name='country_code'
+            required
           />
           <input
             type='text'
@@ -65,7 +71,7 @@ export default function SearchBar() {
             />
           </button>
           <button
-            disabled={!datesValid}
+            disabled={!formValid}
             type='submit'
             className='bg-blue px-10 py-3 rounded-md text-white font-semibold disabled:bg-blue-light'
           >
