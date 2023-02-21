@@ -12,8 +12,6 @@ export default function Index() {
   const router = useRouter();
   const { pickupDateTime, dropOffDateTime, pickupLocation, country_code } =
     router.query;
-  const [showCarDetails, setShowCarDetails] = useState(false);
-  const [currentCar, setCurrentCar] = useState(null);
 
   const { isLoading, isSuccess, isError, data, error } = useQuery(
     ['cars'],
