@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import CarFeatures from './Carfeatures';
 
-export default function Car({ car, handleShowCarDetails, showPrice = true }) {
+export default function Car({ car, showPrice = true }) {
   return (
     <div className='flex gap-6 bg-chesky-gray bg-opacity-5 rounded-xl mb-5 last-of-type:mb-0'>
       <Image
@@ -32,12 +32,12 @@ export default function Car({ car, handleShowCarDetails, showPrice = true }) {
                   )}
                 </strong>
               </div>
-              <button
-                onClick={handleShowCarDetails}
+              <a
+                href={`/cars/${car._id}`}
                 className='bg-blue py-3 px-14 text-white text-lg rounded-lg'
               >
                 Rent
-              </button>
+              </a>
             </>
           )}
         </div>
