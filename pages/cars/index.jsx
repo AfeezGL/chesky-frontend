@@ -4,8 +4,9 @@ import SearchBar from '@/components/SearchBar';
 import SideBar from '@/sidebar/SideBar';
 import axiosClient from '@/utils/axios';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import Toastify from 'toastify-js';
 
 export default function Index() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function Index() {
   const [showCarDetails, setShowCarDetails] = useState(false);
   const [currentCar, setCurrentCar] = useState(null);
 
-  const { isLoading, isSuccess, isError, data } = useQuery(
+  const { isLoading, isSuccess, isError, data, error } = useQuery(
     ['cars'],
     async () => {
       const res = await axiosClient.post('/search', {
@@ -27,6 +28,14 @@ export default function Index() {
       enabled: !!pickupDateTime && !!dropOffDateTime && !!pickupLocation,
     }
   );
+
+  useEffect(() => {
+    if (error)
+      Toastify({
+        text: error,
+        duration: 3000,
+      }).showToast();
+  }, [error]);
 
   const handleShowCarDetails = (car) => {
     setShowCarDetails(true);
