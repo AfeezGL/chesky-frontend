@@ -41,7 +41,7 @@ const filters = [
 export default function SideBar() {
   return (
     <section
-      className='sm:bg-blue sm:bg-opacity-10 px-3 py-3 sm:w-[280px]'
+      className='hidden sm:block sm:bg-blue sm:bg-opacity-10 px-3 py-3 sm:w-[280px]'
       aria-label='Sidebar'
     >
       <div className='flex justify-between'>
