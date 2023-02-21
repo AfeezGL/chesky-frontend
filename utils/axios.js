@@ -5,15 +5,16 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log(response);
+    return response;
+  },
   (error) => {
-    if (error.response.status.errors[0].details)
-      throw new Error(error.response.status.errors[0].details);
+    console.log('error: ', error);
+    if (error.response?.data?.data?.error?.status?.errors[0]?.details)
+      throw new Error(error.response.data.data.error.status.errors[0].details);
 
-    if (error.response.data.detail) {
-      throw new Error(error.response.data.detail);
-    }
-    return Promise.reject(error);
+    return Promise.reject('An error occured.');
   }
 );
 
