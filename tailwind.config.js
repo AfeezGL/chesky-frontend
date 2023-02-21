@@ -12,6 +12,7 @@ module.exports = {
     colors: {
       blue: '#5E17EB',
       'blue-light': '#BEDCF2',
+      'brand-blue': '#0076c6',
       white: '#FFFFFF',
       purple: '#7e5bef',
       pink: '#FFD6C6',
