@@ -1,44 +1,69 @@
 import FilterIcon from '@/assets/homepage/filter.svg';
 import useValidateSearchForm from '@/hooks/useValidateSearchForm';
+import { zipCodeClient } from '@/utils/axios';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import AsyncSelect from 'react-select/async';
 
 export default function SearchBar() {
+  const router = useRouter();
+  const [zipCodeDetails, setZipCodeDetails] = useState(null);
   const [pickupDateTime, setPickupDateTime] = useState('');
   const [dropOffDateTime, setDropOffDateTime] = useState('');
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [country_code, setCountryCode] = useState('');
   const [formValid] = useValidateSearchForm({
-    country_code,
-    pickupLocation,
     pickupDateTime,
     dropOffDateTime,
   });
+
+  const getZipCodeOptions = async (inputValue) => {
+    const { data } = await zipCodeClient.get('', {
+      params: {
+        codes: inputValue,
+      },
+    });
+    const options = data.results[inputValue].map((option) => ({
+      label: `${option.city} ${option.state}, ${option.country_code}`,
+      value: {
+        lat: option.latitude,
+        long: option.longitude,
+        country_code: option.country_code,
+      },
+    }));
+    return options;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push({
+      pathname: '/cars',
+      query: {
+        ...zipCodeDetails.value,
+        pickupDateTime,
+        dropOffDateTime,
+      },
+    });
+  };
 
   return (
     <div className='border-blue border-2 rounded-xl mx-auto p-4'>
       <header className='text-blue font-semibold text-2xl pb-3 md:hidden'>
         Quick search
       </header>
-      <form action='/cars' className='md:flex'>
+      <form onSubmit={handleSubmit} className='md:flex'>
         <div className='grid grid-cols-2 gap-2 md:flex md:basis-3/4'>
-          <input
-            type='text'
-            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder='Country code'
-            value={country_code}
-            onChange={(e) => setCountryCode(e.target.value)}
-            name='country_code'
-            required
+          <AsyncSelect
+            placeholder='Zip code'
+            cacheOptions
+            loadOptions={getZipCodeOptions}
+            onChange={setZipCodeDetails}
+            className='block w-full p-2 rounded-sm '
           />
           <input
             type='text'
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder='Pick up location'
-            name='pickupLocation'
-            value={pickupLocation}
-            onChange={(e) => setPickupLocation(e.target.value)}
-            required
+            placeholder='Mile radius'
+            name='mileRadius'
           />
           <input
             type='datetime-local'

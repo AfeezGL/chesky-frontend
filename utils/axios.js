@@ -14,4 +14,10 @@ axiosClient.interceptors.response.use(
   }
 );
 
+const zipCodeClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_ZIP_BASE_URL,
+});
+
+export { zipCodeClient };
+
 export default axiosClient;
