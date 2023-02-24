@@ -64,7 +64,6 @@ export default function SearchBar() {
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
             placeholder='Mile radius'
             name='mileRadius'
-            required
           />
           <input
             type='datetime-local'
