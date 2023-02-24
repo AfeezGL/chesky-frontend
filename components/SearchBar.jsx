@@ -1,19 +1,34 @@
 import FilterIcon from '@/assets/homepage/filter.svg';
 import useValidateSearchForm from '@/hooks/useValidateSearchForm';
+import { zipCodeClient } from '@/utils/axios';
 import Image from 'next/image';
 import { useState } from 'react';
+import AsyncSelect from 'react-select/async';
 
 export default function SearchBar() {
   const [pickupDateTime, setPickupDateTime] = useState('');
   const [dropOffDateTime, setDropOffDateTime] = useState('');
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [country_code, setCountryCode] = useState('');
   const [formValid] = useValidateSearchForm({
-    country_code,
-    pickupLocation,
     pickupDateTime,
     dropOffDateTime,
   });
+
+  const getZipCodeOptions = async (inputValue) => {
+    const { data } = await zipCodeClient.get('', {
+      params: {
+        codes: inputValue,
+      },
+    });
+    const options = data.results[inputValue].map((option) => ({
+      label: `${option.city} ${option.state}, ${option.country_code}`,
+      value: {
+        latitude: option.latitude,
+        longitude: option.longitude,
+        country_code: option.country_code,
+      },
+    }));
+    return options;
+  };
 
   return (
     <div className='border-blue border-2 rounded-xl mx-auto p-4'>
@@ -22,23 +37,10 @@ export default function SearchBar() {
       </header>
       <form action='/cars' className='md:flex'>
         <div className='grid grid-cols-2 gap-2 md:flex md:basis-3/4'>
-          <input
-            type='text'
-            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder='Country code'
-            value={country_code}
-            onChange={(e) => setCountryCode(e.target.value)}
-            name='country_code'
-            required
-          />
-          <input
-            type='text'
-            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder='Pick up location'
-            name='pickupLocation'
-            value={pickupLocation}
-            onChange={(e) => setPickupLocation(e.target.value)}
-            required
+          <AsyncSelect
+            placeholder='Zip code'
+            cacheOptions
+            loadOptions={getZipCodeOptions}
           />
           <input
             type='datetime-local'

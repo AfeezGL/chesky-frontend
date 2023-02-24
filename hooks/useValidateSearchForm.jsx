@@ -4,18 +4,11 @@ function dateGreaterThanNow(date) {
   return new Date(date).getTime() >= new Date().getTime();
 }
 
-const useValidateSearchForm = ({
-  country_code,
-  pickupLocation,
-  pickupDateTime,
-  dropOffDateTime,
-}) => {
+const useValidateSearchForm = ({ pickupDateTime, dropOffDateTime }) => {
   const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
     if (
-      !!country_code &&
-      !!pickupLocation &&
       dateGreaterThanNow(pickupDateTime) &&
       dateGreaterThanNow(dropOffDateTime)
     ) {
@@ -23,7 +16,7 @@ const useValidateSearchForm = ({
     } else {
       setFormValid(false);
     }
-  }, [country_code, pickupLocation, pickupDateTime, dropOffDateTime]);
+  }, [pickupDateTime, dropOffDateTime]);
 
   return [formValid];
 };
