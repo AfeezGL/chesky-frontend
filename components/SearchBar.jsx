@@ -2,10 +2,12 @@ import FilterIcon from '@/assets/homepage/filter.svg';
 import useValidateSearchForm from '@/hooks/useValidateSearchForm';
 import { zipCodeClient } from '@/utils/axios';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 
 export default function SearchBar() {
+  const router = useRouter();
   const [zipCodeDetails, setZipCodeDetails] = useState(null);
   const [pickupDateTime, setPickupDateTime] = useState('');
   const [dropOffDateTime, setDropOffDateTime] = useState('');
@@ -31,12 +33,23 @@ export default function SearchBar() {
     return options;
   };
 
+  const handleSubmit = () => {
+    router.push({
+      pathname: '/cars',
+      query: {
+        ...zipCodeDetails.value,
+        pickupDateTime,
+        dropOffDateTime,
+      },
+    });
+  };
+
   return (
     <div className='border-blue border-2 rounded-xl mx-auto p-4'>
       <header className='text-blue font-semibold text-2xl pb-3 md:hidden'>
         Quick search
       </header>
-      <form action='/cars' className='md:flex'>
+      <form onSubmit={handleSubmit} className='md:flex'>
         <div className='grid grid-cols-2 gap-2 md:flex md:basis-3/4'>
           <AsyncSelect
             placeholder='Zip code'
