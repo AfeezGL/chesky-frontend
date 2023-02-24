@@ -6,6 +6,7 @@ import { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 
 export default function SearchBar() {
+  const [zipCodeDetails, setZipCodeDetails] = useState(null);
   const [pickupDateTime, setPickupDateTime] = useState('');
   const [dropOffDateTime, setDropOffDateTime] = useState('');
   const [formValid] = useValidateSearchForm({
@@ -41,6 +42,15 @@ export default function SearchBar() {
             placeholder='Zip code'
             cacheOptions
             loadOptions={getZipCodeOptions}
+            onChange={setZipCodeDetails}
+            className='block w-full p-2 rounded-sm '
+          />
+          <input
+            type='text'
+            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
+            placeholder='Mile radius'
+            name='mileRadius'
+            required
           />
           <input
             type='datetime-local'
