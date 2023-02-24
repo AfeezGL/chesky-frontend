@@ -33,7 +33,8 @@ export default function SearchBar() {
     return options;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     router.push({
       pathname: '/cars',
       query: {
