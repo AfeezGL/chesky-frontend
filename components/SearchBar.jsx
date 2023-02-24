@@ -25,8 +25,8 @@ export default function SearchBar() {
     const options = data.results[inputValue].map((option) => ({
       label: `${option.city} ${option.state}, ${option.country_code}`,
       value: {
-        latitude: option.latitude,
-        longitude: option.longitude,
+        lat: option.latitude,
+        long: option.longitude,
         country_code: option.country_code,
       },
     }));
