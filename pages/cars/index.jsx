@@ -1,25 +1,25 @@
-import CarDetailsScreen from '@/cars/CarDetailsScreen';
 import Car from '@/cars/partials/Car';
 import SearchBar from '@/components/SearchBar';
 import SideBar from '@/sidebar/SideBar';
 import axiosClient from '@/utils/axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import Toastify from 'toastify-js';
 
 export default function Index() {
   const router = useRouter();
-  const { pickupDateTime, dropOffDateTime, pickupLocation, country_code } =
-    router.query;
+  const { query } = router;
+  const { pickupDateTime, dropOffDateTime, lat, long, country_code } = query;
 
-  const { isLoading, isSuccess, isError, data, error } = useQuery(
+  const { isLoading, isSuccess, isError, data, error, refetch } = useQuery(
     ['cars'],
     async () => {
       const res = await axiosClient.post('/search', {
         pickupDateTime,
         dropOffDateTime,
-        pickupLocation,
+        lat,
+        long,
         country_code,
       });
       return await res.data;
@@ -28,7 +28,8 @@ export default function Index() {
       enabled:
         !!pickupDateTime &&
         !!dropOffDateTime &&
-        !!pickupLocation &&
+        !!lat &&
+        !!long &&
         !!country_code &&
         !!window,
     }
@@ -41,6 +42,10 @@ export default function Index() {
         duration: 3000,
       }).showToast();
   }, [error]);
+
+  useEffect(() => {
+    refetch();
+  }, [query]);
 
   return (
     <>
