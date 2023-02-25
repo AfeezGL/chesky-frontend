@@ -1,22 +1,8 @@
-import {
-  DoorIcon,
-  MileageIcon,
-  PetrolIcon,
-  TransmissionIcon,
-  WifiIcon,
-} from '@/assets/cars';
+import { DoorIcon, TransmissionIcon, WifiIcon } from '@/assets/cars';
 
 export default function CarFeatures({ transmission, doors, connected }) {
   return (
     <div className='grid grid-cols-3 gap-5 text-dark-400 font-normal'>
-      <div className='flex flex-col gap-3 items-center'>
-        <MileageIcon />
-        <p>2000</p>
-      </div>
-      <div className='flex flex-col gap-3 items-center'>
-        <PetrolIcon />
-        <p>Petrol</p>
-      </div>
       <div className='flex flex-col gap-3 items-center'>
         <TransmissionIcon />
         <p>{transmission}</p>
