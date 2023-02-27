@@ -17,6 +17,7 @@ export default function TopOffersSection() {
   const lat = '36.18811';
   const long = '115.176468';
   const country_code = 'US';
+  const pickupLocation = 'California';
 
   const { data } = useQuery(['offers'], async () => {
     const res = await axiosClient.post('/search', {
@@ -25,6 +26,7 @@ export default function TopOffersSection() {
       lat,
       long,
       country_code,
+      pickupLocation,
     });
     return await res.data;
   });
@@ -51,6 +53,7 @@ export default function TopOffersSection() {
               lat,
               long,
               country_code,
+              pickupLocation,
             },
           })
         }
