@@ -8,7 +8,7 @@ const contactDetails = [
   { id: 1, icon: PhoneIcon, details: '12345678890', type: 'Phone number' },
   { id: 2, icon: MailIcon, details: 'chesky@gmail.com', type: 'Email' },
   {
-    id: 2,
+    id: 3,
     icon: LocationIcon,
     details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget.',
     type: 'Location',
