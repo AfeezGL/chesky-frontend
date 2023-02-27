@@ -1,26 +1,20 @@
-import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Offer({ offer }) {
   return (
-    <div
-      style={{
-        aspectRatio: 1 / 1,
-        backgroundImage: "url('/carbg.png')",
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-      }}
-      className='flex flex-col justify-between pb-4'
+    <Link
+      href={`/cars/${offer._id}`}
+      className='relative text-center aspect-square'
     >
-      <div className='relative'>
-        <Image
-          src={offer.companyLogo}
-          alt={offer.company}
-          width={75}
-          height={40}
-          className='absolute right-0'
-        />
-      </div>
-      <strong className='text-white'>{offer.car}</strong>
-    </div>
+      <img
+        src={offer.category.image_url}
+        alt='offer'
+        className='w-full h-full object-contain'
+      />
+      <strong className='absolute top-0 right-0 text-brand-blue pt-3 text-lg uppercase font-normal italic'>
+        {offer.brand}
+      </strong>
+      <strong className='absolute bottom-0 left-0 text-brand-blue text-center w-full'>{`${offer.category.make} ${offer.category.model}`}</strong>
+    </Link>
   );
 }
