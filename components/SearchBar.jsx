@@ -28,6 +28,7 @@ export default function SearchBar() {
         lat: option.latitude,
         long: option.longitude,
         country_code: option.country_code,
+        pickupLocation: option.city,
       },
     }));
     return options;
