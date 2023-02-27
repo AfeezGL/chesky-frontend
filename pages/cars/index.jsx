@@ -10,7 +10,14 @@ import Toastify from 'toastify-js';
 export default function Index() {
   const router = useRouter();
   const { query } = router;
-  const { pickupDateTime, dropOffDateTime, lat, long, country_code } = query;
+  const {
+    pickupDateTime,
+    dropOffDateTime,
+    lat,
+    long,
+    country_code,
+    pickupLocation,
+  } = query;
 
   const { isLoading, isSuccess, isError, data, error, refetch } = useQuery(
     ['cars'],
@@ -21,6 +28,7 @@ export default function Index() {
         lat,
         long,
         country_code,
+        pickupLocation,
       });
       return await res.data;
     },
@@ -31,6 +39,7 @@ export default function Index() {
         !!lat &&
         !!long &&
         !!country_code &&
+        !!pickupLocation &&
         !!window,
     }
   );
