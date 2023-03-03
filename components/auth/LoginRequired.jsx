@@ -1,6 +1,6 @@
 import { AuthContext } from '@/layout/Page';
 import { useContext } from 'react';
-import { LoginScreen } from './LoginScreen';
+import LoginScreen from './LoginScreen';
 
 export default function LoginRequired({ children }) {
   const loggedIn = useContext(AuthContext);
