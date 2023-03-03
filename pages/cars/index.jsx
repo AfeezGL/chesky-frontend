@@ -1,4 +1,5 @@
 import Car from '@/cars/partials/Car';
+import LoginRequired from '@/components/auth/LoginRequired';
 import SearchBar from '@/components/SearchBar';
 import SideBar from '@/sidebar/SideBar';
 import axiosClient from '@/utils/axios';
@@ -57,7 +58,7 @@ export default function Index() {
   }, [query]);
 
   return (
-    <>
+    <LoginRequired>
       <SearchBar />
       <div className='py-10 sm:flex sm:gap-8'>
         <SideBar />
@@ -67,6 +68,6 @@ export default function Index() {
           {isSuccess && data.data.map((car) => <Car car={car} key={car._id} />)}
         </div>
       </div>
-    </>
+    </LoginRequired>
   );
 }
