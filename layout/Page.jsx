@@ -35,8 +35,8 @@ export default function Page({ children }) {
         <NavBar />
         <main className='mx-auto px-4 lg:container'>{children}</main>
         <Footer />
-        <ReactQueryDevtools initialIsOpen={false} />
       </AuthContext.Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
