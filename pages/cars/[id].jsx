@@ -1,7 +1,8 @@
+import CarDetailsScreen from '@/cars/CarDetailsScreen';
+import LoginRequired from '@/components/auth/LoginRequired';
+import axiosClient from '@/utils/axios';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
-import axiosClient from '@/utils/axios';
-import CarDetailsScreen from '@/cars/CarDetailsScreen';
 
 export default function CarDetailsPage() {
   const router = useRouter();
@@ -17,12 +18,12 @@ export default function CarDetailsPage() {
   );
 
   return (
-    <>
+    <LoginRequired>
       {isLoading && 'Loading...'}
       {isSuccess && data.data ? <CarDetailsScreen car={data.data} /> : null}
       {isSuccess && !data.data
         ? "The car you're looking for is no longer available."
         : null}
-    </>
+    </LoginRequired>
   );
 }
