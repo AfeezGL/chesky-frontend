@@ -1,13 +1,29 @@
 import Exit from '@/assets/layout/exit.svg';
 import Hambuger from '@/assets/layout/hambuger.svg';
 import LogoLight from '@/assets/layout/logo-light.png';
+import { auth } from '@/utils/firebase';
+import { signOut } from 'firebase/auth';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import Toastify from 'toastify-js';
+import { AuthContext } from '../Page';
 import NavLinks from './NavLinks';
 
 export default function NavBar() {
   const [navOpen, setNavOpen] = useState(false);
+  const loggedIn = useContext(AuthContext);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      Toastify({
+        text: error.message,
+        duration: 3000,
+      }).showToast();
+    }
+  };
 
   return (
     <nav className='bg-gray-800'>
@@ -20,6 +36,14 @@ export default function NavBar() {
             <div className='hidden sm:ml-6 sm:block'>
               <div className='flex space-x-4'>
                 <NavLinks />
+                {loggedIn && (
+                  <button
+                    onClick={handleLogout}
+                    className='text-dark-100 font-normal text-xl text-left'
+                  >
+                    Logout
+                  </button>
+                )}
               </div>
             </div>
 
@@ -57,6 +81,14 @@ export default function NavBar() {
         <div className='sm:hidden px-6 pb-5' id='mobile-menu'>
           <div className='flex flex-col gap-5'>
             <NavLinks />
+            {loggedIn && (
+              <button
+                onClick={handleLogout}
+                className='text-dark-100 font-normal text-xl text-left'
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
       )}
