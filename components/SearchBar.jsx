@@ -20,6 +20,7 @@ export default function SearchBar() {
     const { data } = await zipCodeClient.get('', {
       params: {
         codes: inputValue,
+        country: 'US',
       },
     });
     const options = data.results[inputValue].map((option) => ({
