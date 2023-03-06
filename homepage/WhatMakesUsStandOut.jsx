@@ -4,14 +4,6 @@ import Attribute from './partials/Attribute';
 
 const uniqueAttributes = [
   {
-    id: 1,
-    title: 'Flexible Rentals',
-    details:
-      'Cancel or change most bookings for free up to 48 hours before pick-up',
-    color: 'pink',
-    image: RentalsImage,
-  },
-  {
     id: 2,
     title: 'No hidden fees',
     details: "Know exactly what you're paying",
@@ -33,7 +25,7 @@ export default function WhatMakesUsStandOut() {
       <h2 className='text-center text-blue capitalize font-extrabold text-4xl pb-12'>
         what makes us stand out
       </h2>
-      <div className='grid grid-cols-3 gap-3'>
+      <div className={`grid grid-cols-${uniqueAttributes.length} gap-3`}>
         {uniqueAttributes.map((attribute) => (
           <Attribute attribute={attribute} key={attribute.id} />
         ))}
