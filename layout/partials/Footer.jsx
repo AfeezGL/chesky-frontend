@@ -25,7 +25,9 @@ export default function Footer() {
         <Image src={Facebook} alt='Facebook' />
         <Image src={Twitter} alt='Twitter' />
       </div>
-      <p className='text-sm font-light'>&copy; All Rights Reserved By chesky</p>
+      <p className='text-sm font-light text-pink'>
+        &copy; All Rights Reserved By chesky
+      </p>
     </footer>
   );
 }
