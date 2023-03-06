@@ -21,9 +21,7 @@ export default function ContactUsSection() {
               have feedback for us, drop a message
             </strong>
             <p className='text-xs font-normal text-dark-200 leading-6'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget.
+              Contact us with the details below
             </p>
           </div>
           <ul className='list-none  max-w-sm'>
