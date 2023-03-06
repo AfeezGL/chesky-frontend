@@ -24,7 +24,7 @@ export default function PartnersSection() {
       <h2 className='capitalize text-blue font-extrabold text-4xl'>
         Connecting you to the biggest brands in car rental
       </h2>
-      <div className='grid grid-cols-4 md:grid-cols-8 py-10'>
+      <div className='grid grid-cols-4 md:grid-cols-8 py-10 gap-y-5'>
         {partners.map((partner) => (
           <Image
             src={partner.logo}
