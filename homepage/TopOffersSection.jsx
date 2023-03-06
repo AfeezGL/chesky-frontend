@@ -39,7 +39,7 @@ export default function TopOffersSection() {
         Top offers for you
       </h2>
       <div className='w-full grid auto-rows-fr grid-cols-2 gap-4 sm:grid-cols-4'>
-        {data.data.map((offer) => (
+        {data.data.slice(0, 8).map((offer) => (
           <Offer key={offer._id} offer={offer} />
         ))}
       </div>
