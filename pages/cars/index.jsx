@@ -31,6 +31,8 @@ export default function Index() {
         country_code,
         pickupLocation,
       });
+      const data = await res.data;
+      console.log(data);
       return await res.data;
     },
     {
