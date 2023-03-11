@@ -11,8 +11,8 @@ import AsyncSelect from 'react-select/async';
 export default function SearchBar() {
   const router = useRouter();
   const [zipCodeDetails, setZipCodeDetails] = useState(null);
-  const [pickupDateTime, setPickupDateTime] = useState('');
-  const [dropOffDateTime, setDropOffDateTime] = useState('');
+  const [pickupDateTime, setPickupDateTime] = useState(new Date());
+  const [dropOffDateTime, setDropOffDateTime] = useState(new Date());
   const [formValid] = useValidateSearchForm({
     pickupDateTime,
     dropOffDateTime,
@@ -43,8 +43,8 @@ export default function SearchBar() {
       pathname: '/cars',
       query: {
         ...zipCodeDetails.value,
-        pickupDateTime,
-        dropOffDateTime,
+        pickupDateTime: pickupDateTime.toJSON(),
+        dropOffDateTime: dropOffDateTime.toJSON(),
       },
     });
   };
@@ -71,14 +71,10 @@ export default function SearchBar() {
           />
           <DatePicker
             selected={pickupDateTime}
-            onChange={(date) => {
-              setPickupDateTime(date);
-              console.log(date);
-            }}
+            onChange={(date) => setPickupDateTime(date)}
             showTimeSelect
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40 outline-none border-0'
             placeholderText='Pick up date'
-            showIcon
             dateFormat='Pp'
           />
           <DatePicker
@@ -86,7 +82,6 @@ export default function SearchBar() {
             onChange={(date) => setDropOffDateTime(date)}
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40 outline-none border-0'
             placeholderText='Drop off date'
-            showIcon
           />
         </div>
 
