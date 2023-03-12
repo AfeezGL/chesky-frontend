@@ -1,16 +1,18 @@
 import Car from '@/cars/partials/Car';
 import LoginRequired from '@/components/auth/LoginRequired';
 import SearchBar from '@/components/SearchBar';
+import carReducer, { actions, initialState } from '@/reducers/carReducer';
 import SideBar from '@/sidebar/SideBar';
 import axiosClient from '@/utils/axios';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 import { useQuery } from 'react-query';
 import Toastify from 'toastify-js';
 
 export default function Index() {
   const router = useRouter();
   const { query } = router;
+  const [state, dispatch] = useReducer(carReducer, initialState);
   const {
     pickupDateTime,
     dropOffDateTime,
@@ -31,8 +33,6 @@ export default function Index() {
         country_code,
         pickupLocation,
       });
-      const data = await res.data;
-      console.log(data);
       return await res.data;
     },
     {
@@ -59,15 +59,28 @@ export default function Index() {
     refetch();
   }, [query]);
 
+  useEffect(() => {
+    if (data?.data) {
+      dispatch({ type: actions.UPDATE_CARS, payload: data.data });
+    }
+  }, [data]);
+
   return (
     <LoginRequired>
       <SearchBar />
       <div className='py-10 sm:flex sm:gap-8'>
-        <SideBar />
+        <SideBar carDispatch={dispatch} />
         <div className='px-3 sm:px-0 w-full'>
           {isLoading && 'Loading...'}
           {isError && <div>Failed to load</div>}
-          {isSuccess && data.data.map((car) => <Car car={car} key={car._id} />)}
+          {isSuccess && state.filteredCars
+            ? state.filteredCars.map((car) => (
+                <Car
+                  car={car}
+                  key={(Math.random() + 1).toString(36).substring(2)}
+                />
+              ))
+            : null}
         </div>
       </div>
     </LoginRequired>
