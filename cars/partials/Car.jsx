@@ -1,15 +1,12 @@
-import Image from 'next/image';
 import CarFeatures from './Carfeatures';
 
 export default function Car({ car, showPrice = true }) {
   return (
     <div className='flex gap-6 bg-chesky-gray bg-opacity-5 rounded-xl mb-5 last-of-type:mb-0'>
       <div className='relative w-[245px] h-[245px]'>
-        <Image
+        <img
           src={car.category?.image_url}
           alt={`${car.category?.make} ${car.category?.model}`}
-          width={245}
-          height={245}
           className='object-contain h-full w-full'
         />
         <strong className='absolute top-0 right-0 text-brand-blue pt-3 text-lg uppercase font-normal italic'>
