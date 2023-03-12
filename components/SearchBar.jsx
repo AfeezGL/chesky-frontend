@@ -1,7 +1,6 @@
 import FilterIcon from '@/assets/homepage/filter.svg';
 import useValidateSearchForm from '@/hooks/useValidateSearchForm';
 import { zipCodeClient } from '@/utils/axios';
-import { tryFilter } from '@/utils/filter';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -18,8 +17,6 @@ export default function SearchBar() {
     pickupDateTime,
     dropOffDateTime,
   });
-
-  tryFilter();
 
   const getLocationOptionsFromZipCode = async (inputValue) => {
     const { data } = await zipCodeClient.get('', {
