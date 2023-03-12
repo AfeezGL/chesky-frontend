@@ -1,5 +1,5 @@
 import { filterAttributes } from '@/helpers/carFilter';
-import { actions } from '@/reducers/filterReducer';
+import { actions } from '@/reducers/carReducer';
 import { useState } from 'react';
 
 export default function SingleSelect({ options, dispatch }) {

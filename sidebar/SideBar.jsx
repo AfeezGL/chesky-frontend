@@ -1,16 +1,7 @@
 import { filterOptions } from '@/helpers/carFilter';
-import { actions } from '@/reducers/carReducer';
-import filterReducer, { initialState } from '@/reducers/filterReducer';
-import { useEffect, useReducer } from 'react';
 import Filter from './Filter';
 
-export default function SideBar({ carDispatch }) {
-  const [filters, dispatch] = useReducer(filterReducer, initialState);
-
-  useEffect(() => {
-    carDispatch({ type: actions.FILTER, payload: filters });
-  }, [filters]);
-
+export default function SideBar({ dispatch }) {
   return (
     <section
       className='hidden sm:block sm:bg-blue sm:bg-opacity-10 px-3 py-3 sm:w-[280px]'

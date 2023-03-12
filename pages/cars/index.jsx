@@ -65,11 +65,15 @@ export default function Index() {
     }
   }, [data]);
 
+  useEffect(() => {
+    dispatch({ type: actions.FILTER, payload: state.filters });
+  }, [state.filters]);
+
   return (
     <LoginRequired>
       <SearchBar />
       <div className='py-10 sm:flex sm:gap-8'>
-        <SideBar carDispatch={dispatch} />
+        <SideBar dispatch={dispatch} />
         <div className='px-3 sm:px-0 w-full'>
           {isLoading && 'Loading...'}
           {isError && <div>Failed to load</div>}

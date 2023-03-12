@@ -1,4 +1,4 @@
-import { actions } from '@/reducers/filterReducer';
+import { actions } from '@/reducers/carReducer';
 
 export default function Option({ option, dispatch }) {
   return (
