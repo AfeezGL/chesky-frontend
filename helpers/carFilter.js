@@ -48,7 +48,7 @@ export const filterOptions = [
       },
       {
         id: 3,
-        name: 'wifi',
+        name: 'Connected car',
         filter: { type: filterAttributes.FEATURE, value: 'connected_car' },
       },
     ],
