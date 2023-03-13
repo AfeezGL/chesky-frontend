@@ -4,25 +4,28 @@ import { zipCodeClient } from '@/utils/axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import AsyncSelect from 'react-select/async';
 
 export default function SearchBar() {
   const router = useRouter();
-  const [zipCodeDetails, setZipCodeDetails] = useState(null);
-  const [pickupDateTime, setPickupDateTime] = useState('');
-  const [dropOffDateTime, setDropOffDateTime] = useState('');
+  const [location, setLocation] = useState(null);
+  const [pickupDateTime, setPickupDateTime] = useState(new Date());
+  const [dropOffDateTime, setDropOffDateTime] = useState(new Date());
   const [formValid] = useValidateSearchForm({
     pickupDateTime,
     dropOffDateTime,
   });
 
-  const getZipCodeOptions = async (inputValue) => {
+  const getLocationOptionsFromZipCode = async (inputValue) => {
     const { data } = await zipCodeClient.get('', {
       params: {
         codes: inputValue,
         country: 'US',
       },
     });
+
     const options = data.results[inputValue].map((option) => ({
       label: `${option.city} ${option.state}, ${option.country_code}`,
       value: {
@@ -32,6 +35,7 @@ export default function SearchBar() {
         pickupLocation: option.city,
       },
     }));
+
     return options;
   };
 
@@ -40,9 +44,9 @@ export default function SearchBar() {
     router.push({
       pathname: '/cars',
       query: {
-        ...zipCodeDetails.value,
-        pickupDateTime,
-        dropOffDateTime,
+        ...location.value,
+        pickupDateTime: pickupDateTime.toJSON(),
+        dropOffDateTime: dropOffDateTime.toJSON(),
       },
     });
   };
@@ -53,37 +57,35 @@ export default function SearchBar() {
         Quick search
       </header>
       <form onSubmit={handleSubmit} className='md:flex'>
-        <div className='grid grid-cols-2 gap-2 md:flex md:basis-3/4'>
+        <div className='grid grid-cols-2 gap-2 md:flex md:basis-3/4 md:items-center'>
           <AsyncSelect
             placeholder='Zip code'
             cacheOptions
-            loadOptions={getZipCodeOptions}
-            onChange={setZipCodeDetails}
+            loadOptions={getLocationOptionsFromZipCode}
+            onChange={setLocation}
             className='block w-full p-2 rounded-sm '
           />
           <input
             type='text'
-            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
+            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40 outline-none border-0'
             placeholder='Mile radius'
             name='mileRadius'
           />
-          <input
-            type='datetime-local'
-            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder='Select pick up date'
-            name='pickupDateTime'
-            value={pickupDateTime}
-            onChange={(e) => setPickupDateTime(e.target.value)}
-            required
+          <DatePicker
+            selected={pickupDateTime}
+            onChange={(date) => setPickupDateTime(date)}
+            showTimeSelect
+            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40 outline-none border-0'
+            placeholderText='Pick up date'
+            dateFormat='Pp'
           />
-          <input
-            type='date'
-            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40'
-            placeholder='Select drop off date'
-            name='dropOffDateTime'
-            value={dropOffDateTime}
-            onChange={(e) => setDropOffDateTime(e.target.value)}
-            required
+          <DatePicker
+            selected={dropOffDateTime}
+            onChange={(date) => {
+              setDropOffDateTime(date);
+            }}
+            className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40 outline-none border-0'
+            placeholderText='Drop off date'
           />
         </div>
 
