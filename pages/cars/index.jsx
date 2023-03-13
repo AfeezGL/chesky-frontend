@@ -86,6 +86,9 @@ export default function Index() {
                 />
               ))
             : null}
+          {state.filters.length > 0 && state.filteredCars.length < 1
+            ? 'No cars with the applied filters'
+            : null}
         </div>
       </div>
     </LoginRequired>
