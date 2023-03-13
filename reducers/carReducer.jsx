@@ -22,7 +22,11 @@ const carReducer = (state, action) => {
         filteredCars: action.payload,
       };
     case actions.FILTER:
-      if (action.payload.length === 0) return state;
+      if (action.payload.length === 0)
+        return {
+          ...state,
+          filteredCars: state.cars,
+        };
       return {
         ...state,
         filteredCars: filterCars(state.cars, action.payload),
