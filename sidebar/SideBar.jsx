@@ -9,7 +9,6 @@ export default function SideBar({ dispatch }) {
     >
       <div className='flex justify-between'>
         <h2 className='text-blue text-2xl font-bold'>Filter</h2>
-        <button className='text-dark-100'>Clear all filters</button>
       </div>
       {filterOptions.map((filter) => (
         <Filter category={filter} key={filter.id} dispatch={dispatch} />
