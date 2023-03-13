@@ -10,7 +10,7 @@ import AsyncSelect from 'react-select/async';
 
 export default function SearchBar() {
   const router = useRouter();
-  const [location, setLocation] = useState(null);
+  const [zipCodeDetails, setZipCodeDetails] = useState(null);
   const [pickupDateTime, setPickupDateTime] = useState(new Date());
   const [dropOffDateTime, setDropOffDateTime] = useState(new Date());
   const [formValid] = useValidateSearchForm({
@@ -18,14 +18,13 @@ export default function SearchBar() {
     dropOffDateTime,
   });
 
-  const getLocationOptionsFromZipCode = async (inputValue) => {
+  const getZipCodeOptions = async (inputValue) => {
     const { data } = await zipCodeClient.get('', {
       params: {
         codes: inputValue,
         country: 'US',
       },
     });
-
     const options = data.results[inputValue].map((option) => ({
       label: `${option.city} ${option.state}, ${option.country_code}`,
       value: {
@@ -35,7 +34,6 @@ export default function SearchBar() {
         pickupLocation: option.city,
       },
     }));
-
     return options;
   };
 
@@ -44,7 +42,7 @@ export default function SearchBar() {
     router.push({
       pathname: '/cars',
       query: {
-        ...location.value,
+        ...zipCodeDetails.value,
         pickupDateTime: pickupDateTime.toJSON(),
         dropOffDateTime: dropOffDateTime.toJSON(),
       },
@@ -61,8 +59,8 @@ export default function SearchBar() {
           <AsyncSelect
             placeholder='Zip code'
             cacheOptions
-            loadOptions={getLocationOptionsFromZipCode}
-            onChange={setLocation}
+            loadOptions={getZipCodeOptions}
+            onChange={setZipCodeDetails}
             className='block w-full p-2 rounded-sm '
           />
           <input
@@ -81,9 +79,7 @@ export default function SearchBar() {
           />
           <DatePicker
             selected={dropOffDateTime}
-            onChange={(date) => {
-              setDropOffDateTime(date);
-            }}
+            onChange={(date) => setDropOffDateTime(date)}
             className='block w-full p-2 rounded-sm bg-gray-light bg-opacity-40 outline-none border-0'
             placeholderText='Drop off date'
           />
