@@ -44,6 +44,7 @@ export default function Index() {
         !!country_code &&
         !!pickupLocation &&
         !!window,
+      staleTime: 600000,
     }
   );
 
