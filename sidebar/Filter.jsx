@@ -1,18 +1,13 @@
 import Option from './Option';
-import SingleSelect from './SingleSelect';
 
-export default function Filter({ category, dispatch }) {
+export default function Filter({ catergory }) {
   return (
     <div>
-      <h3 className='text-blue font-normal text-xl py-2'>{category.name}</h3>
+      <h3 className='text-blue font-normal text-xl py-2'>{catergory.name}</h3>
       <form action='' className='px-2'>
-        {category.single ? (
-          <SingleSelect options={category.options} dispatch={dispatch} />
-        ) : (
-          category.options.map((option) => (
-            <Option option={option} key={option.id} dispatch={dispatch} />
-          ))
-        )}
+        {catergory.options.map((option) => (
+          <Option option={option} key={option.id} />
+        ))}
       </form>
     </div>
   );
